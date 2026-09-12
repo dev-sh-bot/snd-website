@@ -45,11 +45,14 @@ export default function SDPage() {
     <div>
       <section className="pt-32 pb-20 px-6" style={{ background: C.lightGray }}>
         <Container>
-          <div className="flex items-center gap-2 mb-6 text-sm" style={{ color: C.slate, fontFamily: bodyFont }}>
+          <div className="hidden xl:flex items-center justify-center xl:justify-start gap-2 mb-6 text-sm" style={{ color: C.slate, fontFamily: bodyFont }}>
             <span>Products</span><ChevronRight size={14} /><span style={{ color: C.blue }}>Sales & Distribution Software</span>
           </div>
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
+          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-center">
+            <div className="order-1">
+              <RouteMapMockup />
+            </div>
+            <div className="order-2 min-w-0 text-center xl:text-left">
               <Eyebrow><Route size={11} /> Sales & Distribution Software</Eyebrow>
               <h1 className="text-4xl md:text-5xl font-bold mb-5 leading-tight" style={{ color: C.nearBlack, fontFamily: headingFont, letterSpacing: "-0.5px" }}>
                 Your Entire Distribution Network. Under Control.
@@ -57,12 +60,11 @@ export default function SDPage() {
               <p className="text-lg mb-8 leading-relaxed" style={{ color: C.slate, fontFamily: bodyFont }}>
                 From route planning to field order booking to recovery collection — SalesVince gives you complete visibility over your distribution operations, in real time.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <PrimaryBtn href={PAGE_PATHS.demo} size="lg">Book Free Demo <ArrowRight size={16} /></PrimaryBtn>
-                <WABtn>WhatsApp Us Now</WABtn>
+          <div className="flex flex-row gap-2 sm:gap-3 justify-center xl:justify-start w-full max-w-md mx-auto">
+                <PrimaryBtn href={PAGE_PATHS.demo} size="sm" className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !gap-1 !text-xs sm:!px-8 sm:!py-4 sm:!gap-2 sm:!text-base">Book Free Demo <ArrowRight size={16} className="shrink-0" aria-hidden /></PrimaryBtn>
+                <WABtn className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !py-2.5 !gap-1 !text-xs sm:!px-6 sm:!py-3 sm:!gap-2 sm:!text-sm">WhatsApp Us Now</WABtn>
               </div>
             </div>
-            <RouteMapMockup />
           </div>
         </Container>
       </section>
@@ -97,31 +99,9 @@ export default function SDPage() {
       {/* Solution */}
       <Section>
         <Container>
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <Eyebrow><Zap size={11} /> The SalesVince Solution</Eyebrow>
-              <H2 center={false}>Complete Visibility. From Depot to Shop Door.</H2>
-              <div className="space-y-5 mt-6">
-                {[
-                  { icon: Route, title: "Route Planning", text: "Build and manage sales routes for each salesperson. Assign shops, set visit frequency, and optimize for efficiency." },
-                  { icon: ShoppingCart, title: "Mobile Order Booking", text: "Salespeople book orders directly on their phone at each shop. No paper, no WhatsApp chaos." },
-                  { icon: DollarSign, title: "Recovery Tracking", text: "Record collections at the point of visit. Outstanding balances update instantly in the office system." },
-                  { icon: MapPin, title: "Live Field Monitoring", text: "See where each salesperson is, which shops they have visited, and what they have sold — right now." },
-                ].map((s, i) => (
-                  <div key={i} className="flex gap-4">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "#EFF4FF" }}>
-                      <s.icon size={18} color={C.blue} />
-                    </div>
-                    <div>
-                      <h4 className="font-bold mb-1" style={{ color: C.nearBlack, fontFamily: headingFont }}>{s.title}</h4>
-                      <p className="text-sm" style={{ color: C.slate, fontFamily: bodyFont }}>{s.text}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            {/* Mobile app mockup */}
-            <div className="flex justify-center">
+          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-center">
+            {/* Mobile app mockup — first on all breakpoints (left at lg+) */}
+            <div className="order-1 flex justify-center">
               <div className="relative" style={{ width: 260 }}>
                 <div className="rounded-[44px] overflow-hidden" style={{ border: "8px solid #0A1A4F", boxShadow: "0 40px 80px rgba(10,26,79,0.3)" }}>
                   <div className="px-4 pt-3 pb-1 flex items-center justify-between" style={{ background: "#050D20" }}>
@@ -154,6 +134,28 @@ export default function SDPage() {
                     <button className="w-full mt-3 py-2.5 rounded-xl text-white text-xs font-semibold" style={{ background: gradBtn, fontFamily: bodyFont }}>Book Next Order</button>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div className="order-2">
+              <Eyebrow><Zap size={11} /> The SalesVince Solution</Eyebrow>
+              <H2 center={false}>Complete Visibility. From Depot to Shop Door.</H2>
+              <div className="space-y-5 mt-6">
+                {[
+                  { icon: Route, title: "Route Planning", text: "Build and manage sales routes for each salesperson. Assign shops, set visit frequency, and optimize for efficiency." },
+                  { icon: ShoppingCart, title: "Mobile Order Booking", text: "Salespeople book orders directly on their phone at each shop. No paper, no WhatsApp chaos." },
+                  { icon: DollarSign, title: "Recovery Tracking", text: "Record collections at the point of visit. Outstanding balances update instantly in the office system." },
+                  { icon: MapPin, title: "Live Field Monitoring", text: "See where each salesperson is, which shops they have visited, and what they have sold — right now." },
+                ].map((s, i) => (
+                  <div key={i} className="flex gap-4">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "#EFF4FF" }}>
+                      <s.icon size={18} color={C.blue} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold mb-1" style={{ color: C.nearBlack, fontFamily: headingFont }}>{s.title}</h4>
+                      <p className="text-sm" style={{ color: C.slate, fontFamily: bodyFont }}>{s.text}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

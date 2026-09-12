@@ -6,9 +6,8 @@ import {
   Sub,
   Section,
   Container,
-  PrimaryBtn,
 } from "@/components/ui";
-import { C, grad, gradLight, headingFont, bodyFont, PAGE_PATHS } from "@/lib/brand";
+import { C, grad, gradLight, headingFont, bodyFont } from "@/lib/brand";
 import { getAllPosts } from "@/lib/blog";
 
 export default function BlogPage() {

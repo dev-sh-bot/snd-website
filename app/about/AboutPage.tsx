@@ -25,7 +25,7 @@ export default function AboutPage() {
     <div>
       <section className="pt-32 pb-20 px-6" style={{ background: grad }}>
         <Container>
-          <div className="max-w-2xl">
+          <div className="max-w-2xl text-center xl:text-left">
             <Eyebrow><Building2 size={11} /> About Us</Eyebrow>
             <H1 light>Built in Pakistan, Built for Pakistan</H1>
             <p className="text-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.72)", fontFamily: bodyFont }}>
@@ -37,7 +37,7 @@ export default function AboutPage() {
 
       <Section>
         <Container>
-          <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-center mb-20">
             <div>
               <Eyebrow><Target size={11} /> Our Mission</Eyebrow>
               <H2 center={false}>Why We Built SalesVince</H2>

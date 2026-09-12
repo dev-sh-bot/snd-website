@@ -39,7 +39,7 @@ export default async function BlogPostPage({ params }: Props) {
         })}
       />
       <section className="pt-32 pb-16 px-6" style={{ background: C.lightGray }}>
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <Link href={PAGE_PATHS.blog} className="inline-flex items-center gap-2 text-sm font-semibold mb-8" style={{ color: C.blue, fontFamily: bodyFont }}>
             ← Back to Blog
           </Link>

@@ -106,29 +106,31 @@ export default function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="min-h-screen flex items-center pt-24 pb-16 px-6 relative overflow-hidden" style={{ background: grad }}>
+      <section className="min-h-screen flex items-center pt-24 pb-16 px-6 relative overflow-x-clip xl:overflow-x-visible" style={{ background: grad }}>
         {/* Grid pattern */}
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)", backgroundSize: "48px 48px" }} />
         {/* Glow */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-15" style={{ background: C.bright, filter: "blur(120px)" }} />
 
-        <div className="max-w-6xl mx-auto w-full relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
+        <div className="max-w-7xl mx-auto w-full relative z-10">
+          <div className="grid xl:grid-cols-2 gap-10 xl:gap-16 items-center">
+        <div className="relative w-full min-w-0 overflow-visible px-1 xl:px-10 order-1 xl:order-2">
+          <DashboardMockup />
+        </div>
+        <div className="order-2 xl:order-1 min-w-0 text-center xl:text-left">
               <Eyebrow><Zap size={11} /> ERP & Sales Distribution Software for Pakistan</Eyebrow>
               <H1 light>Run Your Entire Business From One Software</H1>
-              <p className="text-lg mb-8 leading-relaxed" style={{ color: "rgba(255,255,255,0.72)", fontFamily: bodyFont, maxWidth: 480 }}>
+              <p className="text-lg mb-8 leading-relaxed mx-auto xl:mx-0" style={{ color: "rgba(255,255,255,0.72)", fontFamily: bodyFont, maxWidth: 480 }}>
                 SalesVince helps Pakistani SMEs, distributors, and manufacturers manage sales, inventory, accounts, and reporting in one place. Less manual work, fewer errors, and clear numbers you can trust.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 mb-5">
-                <PrimaryBtn href={PAGE_PATHS.demo} size="lg">Book Free Demo <ArrowRight size={16} aria-hidden /></PrimaryBtn>
-                <WABtn>WhatsApp Us Now</WABtn>
+              <div className="flex flex-row gap-2 sm:gap-3 mb-5 justify-center xl:justify-start">
+                <PrimaryBtn href={PAGE_PATHS.demo} size="sm" className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !gap-1 !text-xs sm:!px-8 sm:!py-4 sm:!gap-2 sm:!text-base">Book Free Demo <ArrowRight size={16} className="shrink-0" aria-hidden /></PrimaryBtn>
+                <WABtn className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !py-2.5 !gap-1 !text-xs sm:!px-6 sm:!py-3 sm:!gap-2 sm:!text-sm">WhatsApp Us Now</WABtn>
               </div>
               <p className="text-sm" style={{ color: "rgba(255,255,255,0.45)", fontFamily: bodyFont }}>
                 Free demo · No commitment · Setup support in Urdu and English
               </p>
             </div>
-            <DashboardMockup />
           </div>
         </div>
       </section>
@@ -142,7 +144,7 @@ export default function HomePage() {
               We designed SalesVince for the real challenges Pakistani distributors, traders, and manufacturers face every day.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4 sm:gap-6">
             {[
               { icon: Headphones, label: "Local Support Team", desc: "Karachi-based team" },
               { icon: MessageSquare, label: "Urdu & English Support", desc: "Your language" },
@@ -226,13 +228,13 @@ export default function HomePage() {
           <div className="text-center mb-10">
             <H2 light>Trusted Across Industries</H2>
           </div>
-          <div className="grid grid-cols-3 md:grid-cols-9 gap-4 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-9 gap-4 mb-8">
             {industries.map((ind, i) => (
-              <Link key={i} href={PAGE_PATHS.industries} className="flex flex-col items-center gap-2 group">
+              <Link key={i} href={PAGE_PATHS.industries} className="flex flex-col items-center gap-2 group min-w-0">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-200 group-hover:scale-110" style={{ background: "rgba(255,255,255,0.12)" }}>
                   <ind.icon size={20} color="rgba(255,255,255,0.85)" />
                 </div>
-                <span className="text-xs text-center font-medium" style={{ color: "rgba(255,255,255,0.65)", fontFamily: bodyFont }}>{ind.label}</span>
+                <span className="text-[10px] sm:text-xs text-center font-medium leading-tight" style={{ color: "rgba(255,255,255,0.65)", fontFamily: bodyFont }}>{ind.label}</span>
               </Link>
             ))}
           </div>
@@ -268,9 +270,9 @@ export default function HomePage() {
       </Section>
 
       {/* Why SalesVince */}
-      <Section bg={C.lightGray}>
+      <Section bg={C.lightGray} className="!px-8 sm:!px-10 md:!px-12">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-center">
             <div>
               <Eyebrow><Star size={11} /> Why Choose Us</Eyebrow>
               <H2 center={false}>Why Pakistani Businesses Choose SalesVince</H2>
@@ -288,20 +290,22 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            <PhoneMockup />
+            <div className="flex justify-center xl:justify-end pr-4 sm:pr-8">
+              <PhoneMockup />
+            </div>
           </div>
         </Container>
       </Section>
 
       {/* Process */}
-      <Section>
+      <Section className="sm:px-8 md:px-10">
         <Container>
           <div className="text-center mb-14">
             <Eyebrow><Clock size={11} /> Getting Started</Eyebrow>
             <H2>Getting Started Is Easy</H2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
-            <div className="absolute top-8 left-[12.5%] right-[12.5%] h-0.5 hidden md:block" style={{ background: `linear-gradient(90deg, ${C.blue}, ${C.bright})`, opacity: 0.2 }} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 relative">
+            <div className="absolute top-8 left-[12.5%] right-[12.5%] h-0.5 hidden xl:block" style={{ background: `linear-gradient(90deg, ${C.blue}, ${C.bright})`, opacity: 0.2 }} />
             {[
               { n: "1", title: "Book a Free Demo", text: "Schedule a call with our team. We will show you the software live.", icon: Calendar },
               { n: "2", title: "See It With Your Data", text: "We set up a demo using your actual products, customers, and pricing.", icon: Eye },
@@ -340,9 +344,9 @@ export default function HomePage() {
           <p className="text-lg mb-8" style={{ color: "rgba(255,255,255,0.65)", fontFamily: bodyFont }}>
             Join hundreds of Pakistani businesses already running on SalesVince. Book your free demo today and see the difference.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <PrimaryBtn href={PAGE_PATHS.demo} size="lg">Book Free Demo <ArrowRight size={16} /></PrimaryBtn>
-            <WABtn>WhatsApp Us Now</WABtn>
+          <div className="flex flex-row gap-2 sm:gap-3 justify-center">
+            <PrimaryBtn href={PAGE_PATHS.demo} size="sm" className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !gap-1 !text-xs sm:!px-8 sm:!py-4 sm:!gap-2 sm:!text-base">Book Free Demo <ArrowRight size={16} className="shrink-0" aria-hidden /></PrimaryBtn>
+            <WABtn className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !py-2.5 !gap-1 !text-xs sm:!px-6 sm:!py-3 sm:!gap-2 sm:!text-sm">WhatsApp Us Now</WABtn>
           </div>
         </div>
       </section>

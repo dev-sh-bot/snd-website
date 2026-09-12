@@ -3,6 +3,7 @@
 import type { ComponentType, ReactNode } from "react";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 import {
   ChevronDown,
@@ -38,14 +39,17 @@ function btnPadding(size: BtnSize) {
 }
 
 export function Logo({ variant = "color" }: { variant?: "white" | "color" }) {
-  const bg = variant === "white" ? "rgba(255,255,255,0.18)" : "#EFF4FF";
-  const tc = variant === "white" ? "#fff" : C.blue;
   const wc = variant === "white" ? "#fff" : C.navy;
   return (
     <Link href={PAGE_PATHS.home} className="flex items-center gap-2.5 select-none" aria-label="SalesVince home">
-      <div style={{ background: bg, borderRadius: 9, width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", border: variant === "white" ? "1px solid rgba(255,255,255,0.25)" : "1px solid #C7D7FF", flexShrink: 0 }}>
-        <span style={{ color: tc, fontWeight: 800, fontSize: 13, fontFamily: headingFont, letterSpacing: "-0.5px" }}>SV</span>
-      </div>
+      <Image
+        src={variant === "white" ? "/salesvince-mark.png" : "/salesvince-mark-blue.png"}
+        alt=""
+        aria-hidden="true"
+        width={28}
+        height={28}
+        className="h-7 w-7 shrink-0 object-contain"
+      />
       <span style={{ color: wc, fontWeight: 700, fontSize: 17, fontFamily: headingFont, letterSpacing: "-0.3px" }}>SalesVince</span>
     </Link>
   );
@@ -84,7 +88,7 @@ export function SecBtn({ children, onClick, href, dark = false, full = false, cl
 export function WABtn({ children, href = WHATSAPP_URL, full = false, className = "" }: { children: ReactNode; href?: string; full?: boolean; className?: string }) {
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" className={`px-6 py-3 rounded-xl font-semibold text-sm inline-flex items-center gap-2 text-white transition-all duration-200 hover:opacity-90 active:scale-[0.98] cursor-pointer ${full ? "w-full justify-center" : ""} ${className}`} style={{ background: C.wa, fontFamily: bodyFont }}>
-      <MessageCircle size={16} aria-hidden />
+      <MessageCircle size={16} className="shrink-0" aria-hidden />
       {children}
     </a>
   );
@@ -95,7 +99,7 @@ export function Eyebrow({ children }: { children: ReactNode }) {
 }
 
 export function H1({ children, light = false }: { children: ReactNode; light?: boolean }) {
-  return <h1 className="text-4xl md:text-5xl lg:text-[56px] font-bold leading-[1.1] mb-5 tracking-tight" style={{ color: light ? "#fff" : C.nearBlack, fontFamily: headingFont }}>{children}</h1>;
+  return <h1 className="text-4xl md:text-5xl xl:text-[56px] font-bold leading-[1.1] mb-5 tracking-tight" style={{ color: light ? "#fff" : C.nearBlack, fontFamily: headingFont }}>{children}</h1>;
 }
 
 export function H2({ children, light = false, center = true }: { children: ReactNode; light?: boolean; center?: boolean }) {
@@ -111,7 +115,7 @@ export function Section({ children, bg = "#fff", className = "" }: { children: R
 }
 
 export function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`max-w-6xl mx-auto ${className}`}>{children}</div>;
+  return <div className={`max-w-7xl mx-auto ${className}`}>{children}</div>;
 }
 
 export function IconBadge({ icon: Icon, color = C.blue, bg = "#EFF4FF", size = 20 }: { icon: ComponentType<{ size?: number; color?: string }>; color?: string; bg?: string; size?: number }) {
@@ -128,7 +132,7 @@ export function DashboardMockup() {
     { name: "Gulshan", val: 290 }, { name: "Clifton", val: 560 }, { name: "Korangi", val: 210 },
   ];
   return (
-    <div className="relative w-full max-w-[500px] mx-auto lg:mx-0">
+    <div className="relative w-full max-w-[500px] mx-auto xl:mx-0">
       {/* Browser frame */}
       <div className="rounded-2xl overflow-hidden" style={{ boxShadow: "0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.07)" }}>
         {/* Chrome bar */}
@@ -138,16 +142,16 @@ export function DashboardMockup() {
             <div className="w-3 h-3 rounded-full" style={{ background: "#FFBD2E" }} />
             <div className="w-3 h-3 rounded-full" style={{ background: "#28CA42" }} />
           </div>
-          <div className="flex-1 mx-2 rounded px-3 py-0.5 flex items-center gap-2" style={{ background: "#0A1A4F" }}>
-            <div className="w-1.5 h-1.5 rounded-full" style={{ background: C.bright }} />
-            <span className="text-[9px]" style={{ color: "rgba(255,255,255,0.35)", fontFamily: bodyFont }}>app.salesvince.com/dashboard</span>
+          <div className="flex-1 mx-2 rounded px-3 py-0.5 flex items-center gap-2 min-w-0" style={{ background: "#0A1A4F" }}>
+            <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: C.bright }} />
+            <span className="text-[9px] truncate" style={{ color: "rgba(255,255,255,0.35)", fontFamily: bodyFont }}>app.salesvince.com/dashboard</span>
           </div>
           <Bell size={11} color="rgba(255,255,255,0.25)" />
         </div>
         {/* Dashboard body */}
-        <div className="flex" style={{ background: "#0D1B3E", minHeight: 310 }}>
+        <div className="flex min-w-0" style={{ background: "#0D1B3E", minHeight: 310 }}>
           {/* Sidebar */}
-          <div className="w-12 py-4 flex flex-col items-center gap-3" style={{ background: "#06101E", borderRight: "1px solid rgba(255,255,255,0.04)" }}>
+          <div className="w-12 py-4 flex flex-col items-center gap-3 flex-shrink-0" style={{ background: "#06101E", borderRight: "1px solid rgba(255,255,255,0.04)" }}>
             <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: gradBtn }}>
               <BarChart3 size={14} color="white" />
             </div>
@@ -158,28 +162,28 @@ export function DashboardMockup() {
             ))}
           </div>
           {/* Main content */}
-          <div className="flex-1 p-4">
-            <div className="flex items-start justify-between mb-3">
-              <div>
-                <p className="font-semibold text-white text-xs" style={{ fontFamily: headingFont }}>Good morning, Ali!</p>
-                <p style={{ color: "rgba(255,255,255,0.38)", fontSize: 9, fontFamily: bodyFont }}>Al-Madina Distributors · Karachi · Mon 17 Jun 2026</p>
+          <div className="flex-1 p-3 sm:p-4 min-w-0 overflow-hidden">
+            <div className="flex items-start justify-between mb-3 gap-2">
+              <div className="min-w-0">
+                <p className="font-semibold text-white text-xs truncate" style={{ fontFamily: headingFont }}>Good morning, Ali!</p>
+                <p className="truncate" style={{ color: "rgba(255,255,255,0.38)", fontSize: 9, fontFamily: bodyFont }}>Al-Madina Distributors · Karachi · Mon 17 Jun 2026</p>
               </div>
-              <div className="flex items-center gap-1 px-2 py-1 rounded-full text-[9px] font-semibold" style={{ background: "rgba(59,108,246,0.18)", color: C.bright }}>
+              <div className="flex items-center gap-1 px-2 py-1 rounded-full text-[9px] font-semibold flex-shrink-0" style={{ background: "rgba(59,108,246,0.18)", color: C.bright }}>
                 <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
                 Live
               </div>
             </div>
             {/* KPI cards */}
-            <div className="grid grid-cols-3 gap-2 mb-3">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-3">
               {[
                 { label: "Today's Sales", val: "Rs. 1,245,000", sub: "↑ 12% vs yesterday", c: C.bright },
                 { label: "Stock Value", val: "Rs. 8.4M", sub: "98 active SKUs", c: "#10B981" },
                 { label: "Recovery", val: "Rs. 320,500", sub: "28 parties settled", c: "#F59E0B" },
               ].map((m, i) => (
-                <div key={i} className="rounded-lg p-2.5" style={{ background: "rgba(255,255,255,0.045)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                  <p style={{ color: "rgba(255,255,255,0.38)", fontSize: 8, textTransform: "uppercase", letterSpacing: "0.4px", fontFamily: bodyFont, marginBottom: 3 }}>{m.label}</p>
-                  <p className="font-bold text-white" style={{ fontSize: 11, letterSpacing: "-0.3px", fontFamily: headingFont }}>{m.val}</p>
-                  <p style={{ color: m.c, fontSize: 8, marginTop: 2, fontFamily: bodyFont }}>{m.sub}</p>
+                <div key={i} className="rounded-lg p-1.5 sm:p-2.5 min-w-0" style={{ background: "rgba(255,255,255,0.045)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <p className="truncate" style={{ color: "rgba(255,255,255,0.38)", fontSize: 8, textTransform: "uppercase", letterSpacing: "0.4px", fontFamily: bodyFont, marginBottom: 3 }}>{m.label}</p>
+                  <p className="font-bold text-white truncate" style={{ fontSize: 11, letterSpacing: "-0.3px", fontFamily: headingFont }}>{m.val}</p>
+                  <p className="truncate" style={{ color: m.c, fontSize: 8, marginTop: 2, fontFamily: bodyFont }}>{m.sub}</p>
                 </div>
               ))}
             </div>
@@ -200,8 +204,8 @@ export function DashboardMockup() {
           </div>
         </div>
       </div>
-      {/* Floating card – Recovery */}
-      <div className="absolute -left-14 top-[30%] rounded-2xl p-3.5 hidden md:block" style={{ background: "white", minWidth: 165, border: `1px solid ${C.cardBorder}`, boxShadow: "0 20px 50px rgba(0,0,0,0.15)" }}>
+      {/* Floating cards: tucked inside on lg, float outside on xl+ */}
+      <div className="absolute left-2 xl:-left-14 top-[30%] rounded-2xl p-3.5 hidden xl:block z-10" style={{ background: "white", minWidth: 165, border: `1px solid ${C.cardBorder}`, boxShadow: "0 20px 50px rgba(0,0,0,0.15)" }}>
         <div className="flex items-center gap-2 mb-2">
           <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#DCFCE7" }}>
             <DollarSign size={13} color={C.green} />
@@ -211,8 +215,7 @@ export function DashboardMockup() {
         <p className="font-bold" style={{ color: C.nearBlack, fontSize: 16, fontFamily: headingFont }}>Rs. 320,500</p>
         <p style={{ color: C.green, fontSize: 9, fontFamily: bodyFont }}>✓ 28 parties settled</p>
       </div>
-      {/* Floating card – Order */}
-      <div className="absolute -right-12 bottom-[28%] rounded-2xl p-3.5 hidden md:block" style={{ background: "white", minWidth: 158, border: `1px solid ${C.cardBorder}`, boxShadow: "0 20px 50px rgba(0,0,0,0.15)" }}>
+      <div className="absolute right-2 xl:-right-12 bottom-[28%] rounded-2xl p-3.5 hidden xl:block z-10" style={{ background: "white", minWidth: 158, border: `1px solid ${C.cardBorder}`, boxShadow: "0 20px 50px rgba(0,0,0,0.15)" }}>
         <div className="flex items-center gap-2 mb-2">
           <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#EFF4FF" }}>
             <MapPin size={13} color={C.blue} />
@@ -283,41 +286,41 @@ export function RouteMapMockup() {
 
 export function PhoneMockup() {
   return (
-    <div className="relative mx-auto" style={{ width: 220 }}>
+    <div className="relative mx-auto w-[260px] sm:w-[280px] xl:w-[320px]">
       <div className="rounded-[40px] overflow-hidden" style={{ border: "8px solid #0A1A4F", boxShadow: "0 40px 80px rgba(10,26,79,0.35)" }}>
         {/* Status bar */}
         <div className="px-4 pt-3 pb-1 flex items-center justify-between" style={{ background: "#050D20" }}>
-          <span style={{ color: "rgba(255,255,255,0.6)", fontSize: 9 }}>9:41</span>
+          <span style={{ color: "rgba(255,255,255,0.6)", fontSize: 10 }}>9:41</span>
           <div className="flex items-center gap-1">
             {[1, 2, 3].map(i => <div key={i} className="h-2 rounded-sm" style={{ width: i * 3, background: "rgba(255,255,255,0.6)" }} />)}
           </div>
         </div>
         {/* App content */}
-        <div style={{ background: "#0D1B3E", padding: "10px 12px 16px" }}>
-          <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 8, fontFamily: bodyFont, marginBottom: 6 }}>OWNER REPORT · Today</p>
+        <div style={{ background: "#0D1B3E", padding: "12px 14px 18px" }}>
+          <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 9, fontFamily: bodyFont, marginBottom: 8 }}>OWNER REPORT · Today</p>
           {[
             { label: "Total Sales", val: "Rs. 1,245,000", up: true },
             { label: "Collections", val: "Rs. 320,500", up: true },
             { label: "Expenses", val: "Rs. 42,300", up: false },
             { label: "Stock Value", val: "Rs. 8.4M", up: true },
           ].map((r, i) => (
-            <div key={i} className="flex items-center justify-between py-2" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-              <span style={{ color: "rgba(255,255,255,0.55)", fontSize: 10, fontFamily: bodyFont }}>{r.label}</span>
-              <span className="font-semibold" style={{ color: r.up ? "#10B981" : "#F87171", fontSize: 10, fontFamily: headingFont }}>{r.val}</span>
+            <div key={i} className="flex items-center justify-between py-2.5" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+              <span style={{ color: "rgba(255,255,255,0.55)", fontSize: 12, fontFamily: bodyFont }}>{r.label}</span>
+              <span className="font-semibold" style={{ color: r.up ? "#10B981" : "#F87171", fontSize: 12, fontFamily: headingFont }}>{r.val}</span>
             </div>
           ))}
-          <div className="mt-3 rounded-xl p-2.5" style={{ background: "rgba(59,108,246,0.15)", border: "1px solid rgba(59,108,246,0.25)" }}>
-            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 8, fontFamily: bodyFont }}>TOP PERFORMER</p>
-            <p style={{ color: "white", fontSize: 10, fontFamily: headingFont, fontWeight: 600 }}>Usman Raza</p>
-            <p style={{ color: C.bright, fontSize: 9, fontFamily: bodyFont }}>Rs. 142,000 · 4 orders</p>
+          <div className="mt-3 rounded-xl p-3" style={{ background: "rgba(59,108,246,0.15)", border: "1px solid rgba(59,108,246,0.25)" }}>
+            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 9, fontFamily: bodyFont }}>TOP PERFORMER</p>
+            <p style={{ color: "white", fontSize: 12, fontFamily: headingFont, fontWeight: 600 }}>Usman Raza</p>
+            <p style={{ color: C.bright, fontSize: 10, fontFamily: bodyFont }}>Rs. 142,000 · 4 orders</p>
           </div>
         </div>
       </div>
       {/* Floating pulse */}
-      <div className="absolute -right-6 top-1/3 rounded-xl p-2.5" style={{ background: "white", border: `1px solid ${C.cardBorder}`, boxShadow: "0 8px 24px rgba(0,0,0,0.1)", minWidth: 110 }}>
-        <p style={{ color: C.slate, fontSize: 7, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.3px" }}>Net Profit</p>
-        <p style={{ color: C.green, fontSize: 15, fontWeight: 700, fontFamily: headingFont }}>↑ 18.4%</p>
-        <p style={{ color: C.slate, fontSize: 7 }}>vs last month</p>
+      <div className="absolute -right-4 sm:-right-6 top-1/3 rounded-xl p-2.5 sm:p-3" style={{ background: "white", border: `1px solid ${C.cardBorder}`, boxShadow: "0 8px 24px rgba(0,0,0,0.1)", minWidth: 120 }}>
+        <p style={{ color: C.slate, fontSize: 8, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.3px" }}>Net Profit</p>
+        <p style={{ color: C.green, fontSize: 17, fontWeight: 700, fontFamily: headingFont }}>↑ 18.4%</p>
+        <p style={{ color: C.slate, fontSize: 8 }}>vs last month</p>
       </div>
     </div>
   );
@@ -355,11 +358,11 @@ export function CTABanner() {
         <p className="text-base md:text-lg mb-8 max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.72)", fontFamily: bodyFont }}>
           Book a free demo and see exactly how SalesVince can work for your business — with your own data, in Urdu or English.
         </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <PrimaryBtn href={PAGE_PATHS.demo} size="lg">
-            Book Free Demo <ArrowRight size={16} aria-hidden />
+        <div className="flex flex-row gap-2 sm:gap-3 justify-center">
+          <PrimaryBtn href={PAGE_PATHS.demo} size="sm" className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !gap-1 !text-xs sm:!px-8 sm:!py-4 sm:!gap-2 sm:!text-base">
+            Book Free Demo <ArrowRight size={16} className="shrink-0" aria-hidden />
           </PrimaryBtn>
-          <WABtn>WhatsApp Us Now</WABtn>
+          <WABtn className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !py-2.5 !gap-1 !text-xs sm:!px-6 sm:!py-3 sm:!gap-2 sm:!text-sm">WhatsApp Us Now</WABtn>
         </div>
       </div>
     </section>
@@ -481,8 +484,8 @@ export function LightMod({ n, eyebrow, headline, subhead, body, bullets, imageRi
     <section className="py-20 px-6" style={{ background: bg }}>
       <div className="max-w-7xl mx-auto">
         <div className={`erp-lightmod ${imageRight ? "erp-img-right" : "erp-img-left"}`}>
-          <div className={`order-1 min-w-0 ${imageRight ? "lg:order-2" : "lg:order-1"}`}>{screenshot}</div>
-          <div className={`order-2 min-w-0 ${imageRight ? "lg:order-1" : "lg:order-2"}`}>
+          <div className={`order-1 min-w-0 ${imageRight ? "xl:order-2" : "xl:order-1"}`}>{screenshot}</div>
+          <div className={`order-2 min-w-0 ${imageRight ? "xl:order-1" : "xl:order-2"}`}>
             {label && (
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold mb-4" style={{ background: "#EFF4FF", color: C.blue, fontFamily: bodyFont }}>
                 {label}
@@ -509,12 +512,12 @@ export function LightMod({ n, eyebrow, headline, subhead, body, bullets, imageRi
 /** Product screenshot from /public/images/erp */
 export function ErpShot({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="relative w-full flex items-center justify-center">
+    <div className="relative w-full max-w-md xl:max-w-none mx-auto flex items-center justify-center">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={`/images/erp/${src}`}
         alt={alt}
-        className="w-full h-auto object-contain"
+        className="w-full h-auto object-contain max-h-[420px] xl:max-h-none"
         style={{ filter: "drop-shadow(0 28px 50px rgba(10,26,79,0.18))" }}
         loading="lazy"
       />
@@ -529,10 +532,10 @@ export function DarkMod({ n, headline, subhead, body, bullets, smart, btnLabel =
 }) {
   return (
     <section className="py-20 px-6" style={{ background: grad }}>
-      <div className="max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="order-1 lg:order-2">{screenshot}</div>
-          <div className="order-2 lg:order-1">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-center">
+          <div className="order-1 xl:order-2">{screenshot}</div>
+          <div className="order-2 xl:order-1">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold mb-4" style={{ background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.85)", fontFamily: bodyFont }}>
               Module {String(n).padStart(2, "0")}
             </div>

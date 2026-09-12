@@ -26,19 +26,46 @@ export function Header() {
   const onHome = isHomePath(pathname);
 
   useEffect(() => {
+    const readY = () =>
+      window.scrollY ||
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+
     const update = () => {
-      const y = window.scrollY || document.documentElement.scrollTop || 0;
-      setScrolled(y > 40);
+      setScrolled(readY() > 40);
     };
+
     update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
+    window.addEventListener("scroll", update, { passive: true, capture: true });
+    document.addEventListener("scroll", update, { passive: true, capture: true });
+    return () => {
+      window.removeEventListener("scroll", update, true);
+      document.removeEventListener("scroll", update, true);
+    };
   }, []);
 
+  // Re-read scroll state after navigation so returning to the home hero
+  // restores its transparent header without a synchronous effect update.
   useEffect(() => {
-    closeMobile();
-    setProdDrop(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- close menus on route change only
+    const frame = window.requestAnimationFrame(() => {
+      const y =
+        window.scrollY ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+      setScrolled(y > 40);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname]);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setMobileOpen(false);
+      setProdDrop(false);
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, [pathname]);
 
   useEffect(() => {
@@ -114,9 +141,9 @@ export function Header() {
           backdropFilter: !isTransparent ? "blur(12px)" : "none",
         }}
       >
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Logo variant={logoVariant} />
-          <nav className="hidden lg:flex items-center gap-1" aria-label="Primary">
+          <nav className="hidden xl:flex items-center gap-1" aria-label="Primary">
             {navLinks.map((link, i) => (
               <div
                 key={i}
@@ -177,11 +204,13 @@ export function Header() {
             ))}
           </nav>
           <div className="flex items-center gap-3">
-            <PrimaryBtn href={PAGE_PATHS.demo} size="sm" className="hidden sm:inline-flex">Book Free Demo</PrimaryBtn>
+            <div className="hidden xl:block">
+              <PrimaryBtn href={PAGE_PATHS.demo} size="sm">Book Free Demo</PrimaryBtn>
+            </div>
             <button
               ref={menuBtnRef}
               type="button"
-              className="lg:hidden p-2"
+              className="xl:hidden p-2"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav"

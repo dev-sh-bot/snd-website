@@ -34,9 +34,9 @@ export default function DemoPage() {
   return (
     <div>
       <div className="pt-24" style={{ background: C.lightGray }}>
-        <div className="max-w-6xl mx-auto px-6 py-16">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            <div>
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          <div className="grid xl:grid-cols-2 gap-10 xl:gap-12 items-start">
+            <div className="min-w-0">
               <Eyebrow><Calendar size={11} aria-hidden /> Free Demo</Eyebrow>
               <h1 className="text-4xl md:text-5xl font-bold mb-5 leading-tight" style={{ color: C.nearBlack, fontFamily: headingFont, letterSpacing: "-0.5px" }}>
                 Book Your Free Demo
@@ -84,7 +84,7 @@ export default function DemoPage() {
               </div>
             </div>
 
-            <div className="rounded-3xl p-8" style={{ background: "white", border: `1px solid ${C.cardBorder}`, boxShadow: "0 20px 60px rgba(0,0,0,0.07)" }}>
+            <div className="w-full min-w-0 rounded-3xl p-5 sm:p-8" style={{ background: "white", border: `1px solid ${C.cardBorder}`, boxShadow: "0 20px 60px rgba(0,0,0,0.07)" }}>
               {submitted ? (
                 <div className="text-center py-12" role="status" aria-live="polite">
                   <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ background: "#DCFCE7" }} aria-hidden>
@@ -103,7 +103,7 @@ export default function DemoPage() {
                       setSubmitted(true);
                     }}
                   >
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="demo-name" className="block text-sm font-semibold mb-1.5" style={{ color: C.nearBlack, fontFamily: bodyFont }}>Full Name *</label>
                         <input id="demo-name" name="name" autoComplete="name" required aria-required="true" value={form.name} onChange={e => upd("name", e.target.value)} placeholder="Muhammad Ali" className="w-full px-4 py-3 rounded-xl text-sm" style={{ border: `1px solid ${C.cardBorder}`, background: C.lightGray, color: C.nearBlack, fontFamily: bodyFont }} />
@@ -113,7 +113,7 @@ export default function DemoPage() {
                         <input id="demo-business" name="organization" autoComplete="organization" required aria-required="true" value={form.business} onChange={e => upd("business", e.target.value)} placeholder="Al-Madina Distributors" className="w-full px-4 py-3 rounded-xl text-sm" style={{ border: `1px solid ${C.cardBorder}`, background: C.lightGray, color: C.nearBlack, fontFamily: bodyFont }} />
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="demo-city" className="block text-sm font-semibold mb-1.5" style={{ color: C.nearBlack, fontFamily: bodyFont }}>City *</label>
                         <select id="demo-city" name="city" autoComplete="address-level2" required aria-required="true" value={form.city} onChange={e => upd("city", e.target.value)} className="w-full px-4 py-3 rounded-xl text-sm" style={{ border: `1px solid ${C.cardBorder}`, background: C.lightGray, color: form.city ? C.nearBlack : C.slate, fontFamily: bodyFont }}>
@@ -129,7 +129,7 @@ export default function DemoPage() {
                         </div>
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="demo-type" className="block text-sm font-semibold mb-1.5" style={{ color: C.nearBlack, fontFamily: bodyFont }}>Business Type *</label>
                         <select id="demo-type" name="businessType" required aria-required="true" value={form.type} onChange={e => upd("type", e.target.value)} className="w-full px-4 py-3 rounded-xl text-sm" style={{ border: `1px solid ${C.cardBorder}`, background: C.lightGray, color: form.type ? C.nearBlack : C.slate, fontFamily: bodyFont }}>
@@ -156,8 +156,8 @@ export default function DemoPage() {
                       <label htmlFor="demo-message" className="block text-sm font-semibold mb-1.5" style={{ color: C.nearBlack, fontFamily: bodyFont }}>Message (optional)</label>
                       <textarea id="demo-message" name="message" value={form.message} onChange={e => upd("message", e.target.value)} placeholder="Tell us anything specific about your business or what you want to see in the demo..." rows={3} className="w-full px-4 py-3 rounded-xl text-sm resize-none" style={{ border: `1px solid ${C.cardBorder}`, background: C.lightGray, color: C.nearBlack, fontFamily: bodyFont }} />
                     </div>
-                    <PrimaryBtn type="submit" full size="lg">
-                      Book My Free Demo <ArrowRight size={16} aria-hidden />
+                    <PrimaryBtn type="submit" full size="lg" className="whitespace-nowrap !px-3 !py-3 !text-sm sm:!px-8 sm:!py-4 sm:!text-base">
+                      Book My Free Demo <ArrowRight size={16} className="shrink-0" aria-hidden />
                     </PrimaryBtn>
                     <p className="text-center text-xs" style={{ color: C.slate, fontFamily: bodyFont }}>
                       Your information is private. No spam, only a demo call.

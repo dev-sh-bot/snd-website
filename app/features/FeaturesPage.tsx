@@ -104,7 +104,7 @@ export default function FeaturesPage() {
 
       <Section>
         <Container>
-          <div className="flex flex-wrap gap-2 justify-center mb-10" role="tablist" aria-label="Feature categories">
+          <div className="flex flex-nowrap gap-2 justify-start sm:justify-center mb-10 overflow-x-auto overscroll-x-contain pb-1 -mx-2 px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist" aria-label="Feature categories">
             {tabs.map((tab, i) => (
               <button
                 key={i}
@@ -127,7 +127,7 @@ export default function FeaturesPage() {
                     document.getElementById(`features-tab-${prev}`)?.focus();
                   }
                 }}
-                className="px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200"
+                className="shrink-0 px-3 py-2 rounded-xl font-semibold text-xs sm:px-5 sm:py-2.5 sm:text-sm transition-all duration-200"
                 style={{ background: active === i ? gradBtn : "#EFF4FF", color: active === i ? "white" : C.blue, boxShadow: active === i ? "0 4px 16px rgba(59,108,246,0.3)" : "none", fontFamily: bodyFont }}
               >
                 {tab}

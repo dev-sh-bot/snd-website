@@ -70,7 +70,7 @@ export default function ContactPage() {
             ))}
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16">
             <div className="rounded-2xl overflow-hidden" style={{ background: C.lightGray, border: `1px solid ${C.cardBorder}`, minHeight: 300 }}>
               <div className="h-full flex flex-col items-center justify-center p-10 text-center" style={{ minHeight: 300 }}>
                 <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style={{ background: "#EFF4FF" }} aria-hidden>
@@ -84,7 +84,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="rounded-2xl p-7" style={{ background: "white", border: `1px solid ${C.cardBorder}`, boxShadow: "0 8px 30px rgba(0,0,0,0.05)" }}>
+            <div className="rounded-2xl p-5 sm:p-7" style={{ background: "white", border: `1px solid ${C.cardBorder}`, boxShadow: "0 8px 30px rgba(0,0,0,0.05)" }}>
               {sent ? (
                 <div className="text-center py-10" role="status" aria-live="polite">
                   <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: "#DCFCE7" }} aria-hidden>
@@ -107,7 +107,7 @@ export default function ContactPage() {
                       <label htmlFor="contact-name" className="block text-sm font-semibold mb-1.5" style={{ color: C.nearBlack, fontFamily: bodyFont }}>Your Name</label>
                       <input id="contact-name" name="name" autoComplete="name" required aria-required="true" value={form.name} onChange={e => upd("name", e.target.value)} placeholder="Muhammad Ali" className="w-full px-4 py-3 rounded-xl text-sm" style={{ border: `1px solid ${C.cardBorder}`, background: C.lightGray, fontFamily: bodyFont }} />
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="contact-email" className="block text-sm font-semibold mb-1.5" style={{ color: C.nearBlack, fontFamily: bodyFont }}>Email</label>
                         <input id="contact-email" name="email" type="email" autoComplete="email" required aria-required="true" value={form.email} onChange={e => upd("email", e.target.value)} placeholder="ali@business.com" className="w-full px-4 py-3 rounded-xl text-sm" style={{ border: `1px solid ${C.cardBorder}`, background: C.lightGray, fontFamily: bodyFont }} />

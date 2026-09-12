@@ -21,11 +21,6 @@ import {
   Warehouse,
   Truck,
   Users,
-  MessageCircle,
-  Mail,
-  Webhook,
-  Cloud,
-  Shield,
 } from "lucide-react";
 import {
   PrimaryBtn,
@@ -318,80 +313,82 @@ export default function ERPPage() {
     <div>
       {/* Hero */}
       <section
-        className="pt-32 pb-16 px-6 text-center relative overflow-hidden"
+        className="pt-32 pb-16 px-6 text-center relative overflow-x-hidden"
         style={{ background: C.lightGray }}
       >
         <div
           className="absolute inset-0"
           style={{ background: "linear-gradient(180deg, #EFF4FF 0%, #F4F6FB 100%)" }}
         />
-        <div className="relative z-10 max-w-3xl mx-auto mb-12">
-          <div
-            className="flex items-center justify-center gap-2 mb-5 text-sm"
-            style={{ color: C.slate, fontFamily: bodyFont }}
-          >
-            <span>Products</span>
-            <ChevronRight size={14} />
-            <span style={{ color: C.blue }}>Business ERP Software</span>
+        <div className="relative z-10 flex flex-col max-w-5xl mx-auto">
+          <div className="order-1 w-full mb-12">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/erp/hero-banner.png"
+              alt="SalesVince ERP on desktop and mobile"
+              className="w-full h-auto object-contain"
+              style={{ filter: "drop-shadow(0 32px 60px rgba(10,26,79,0.22))" }}
+            />
           </div>
-          <Eyebrow>
-            <Zap size={11} /> Business ERP Software
-          </Eyebrow>
-          <h1
-            className="text-4xl md:text-5xl lg:text-[54px] font-bold leading-[1.1] mb-5 tracking-tight"
-            style={{ color: C.nearBlack, fontFamily: headingFont }}
-          >
-            The ERP that helps you manage{" "}
-            <span style={{ color: C.blue }}>YOUR BUSINESS.</span>
-          </h1>
-          <p
-            className="text-lg md:text-xl mb-8 leading-relaxed max-w-2xl mx-auto"
-            style={{ color: C.slate, fontFamily: bodyFont }}
-          >
-            Sales, purchase, inventory, production, finance, payroll and POS in one
-            system — with AI forecasting and smart alerts built into every module.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-            <PrimaryBtn href={PAGE_PATHS.demo} size="lg">
-              Start for Free <ArrowRight size={16} />
-            </PrimaryBtn>
-            <SecBtn href={PAGE_PATHS.demo} size="lg">
-              Schedule a Demo
-            </SecBtn>
+          <div className="order-2 max-w-3xl mx-auto w-full">
+            <div
+              className="hidden xl:flex items-center justify-center gap-2 mb-5 text-sm"
+              style={{ color: C.slate, fontFamily: bodyFont }}
+            >
+              <span>Products</span>
+              <ChevronRight size={14} />
+              <span style={{ color: C.blue }}>Business ERP Software</span>
+            </div>
+            <Eyebrow>
+              <Zap size={11} /> Business ERP Software
+            </Eyebrow>
+            <h1
+              className="text-4xl md:text-5xl xl:text-[54px] font-bold leading-[1.1] mb-5 tracking-tight"
+              style={{ color: C.nearBlack, fontFamily: headingFont }}
+            >
+              The ERP that helps you manage{" "}
+              <span style={{ color: C.blue }}>YOUR BUSINESS.</span>
+            </h1>
+            <p
+              className="text-lg md:text-xl mb-8 leading-relaxed max-w-2xl mx-auto"
+              style={{ color: C.slate, fontFamily: bodyFont }}
+            >
+              Sales, purchase, inventory, production, finance, payroll and POS in one
+              system — with AI forecasting and smart alerts built into every module.
+            </p>
+            <div className="flex flex-row gap-2 sm:gap-3 justify-center mb-6 w-full max-w-md sm:max-w-none mx-auto">
+              <PrimaryBtn href={PAGE_PATHS.demo} size="sm" className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !gap-1 !text-xs sm:!px-8 sm:!py-4 sm:!gap-2 sm:!text-base">
+                Start for Free <ArrowRight size={16} className="shrink-0" />
+              </PrimaryBtn>
+              <SecBtn href={PAGE_PATHS.demo} size="sm" className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !text-xs sm:!px-6 sm:!py-3 sm:!text-sm">
+                Schedule a Demo
+              </SecBtn>
+            </div>
+            <div
+              className="grid grid-cols-1 sm:flex sm:flex-wrap sm:justify-center gap-x-5 gap-y-2 text-xs max-w-sm sm:max-w-none mx-auto text-left sm:text-center"
+              style={{ color: C.slate, fontFamily: bodyFont }}
+            >
+              {[
+                "FBR digital invoicing and POS ready",
+                "AI in every module",
+                "Unlimited users",
+                "Android and iOS",
+                "Cloud or on premise",
+              ].map((t, i) => (
+                <span key={i} className="flex items-center gap-1.5 justify-start sm:justify-center">
+                  <Check size={11} color={C.green} aria-hidden className="flex-shrink-0" />
+                  <span>{t}</span>
+                </span>
+              ))}
+            </div>
           </div>
-          <div
-            className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs"
-            style={{ color: C.slate, fontFamily: bodyFont }}
-          >
-            {[
-              "FBR digital invoicing and POS ready",
-              "AI in every module",
-              "Unlimited users",
-              "Android and iOS",
-              "Cloud or on premise",
-            ].map((t, i) => (
-              <span key={i} className="flex items-center gap-1">
-                <Check size={11} color={C.green} />
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="relative z-10 max-w-5xl mx-auto">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/erp/hero-banner.png"
-            alt="SalesVince ERP on desktop and mobile"
-            className="w-full h-auto object-contain"
-            style={{ filter: "drop-shadow(0 32px 60px rgba(10,26,79,0.22))" }}
-          />
         </div>
       </section>
 
       {/* Smart in every module */}
       <section className="py-20 px-6" style={{ background: "white" }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-center">
             <div>
               <H2 center={false}>Smart in every module</H2>
               <p
@@ -482,6 +479,27 @@ export default function ERPPage() {
         </div>
       </section>
 
+      {/* Key highlights strip — between Smart and modules */}
+      <section className="py-5 px-6" style={{ background: C.lightGray }}>
+        <div
+          className="max-w-7xl mx-auto flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs sm:text-sm"
+          style={{ color: C.slate, fontFamily: bodyFont }}
+        >
+          {[
+            "FBR digital invoicing and POS ready",
+            "AI in every module",
+            "Unlimited users",
+            "Android and iOS",
+            "Cloud or on premise",
+          ].map((t, i) => (
+            <span key={i} className="flex items-center gap-1.5">
+              <Check size={12} color={C.green} aria-hidden className="flex-shrink-0" />
+              <span>{t}</span>
+            </span>
+          ))}
+        </div>
+      </section>
+
       {/* Alternating modules — no CTAs in these sections */}
       {MODULES.map((m, i) => (
         <LightMod
@@ -497,66 +515,10 @@ export default function ERPPage() {
         />
       ))}
 
-      {/* Integrations */}
-      <section className="py-20 px-6" style={{ background: "white" }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div>
-              <Eyebrow>Integrations</Eyebrow>
-              <H2 center={false}>Advanced Integrations</H2>
-              <p
-                className="text-base leading-relaxed"
-                style={{ color: C.slate, fontFamily: bodyFont }}
-              >
-                Connect SalesVince to the tools you already use — WhatsApp, email,
-                APIs and webhooks — so invoices, alerts and approvals move without
-                retyping.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {[
-                { icon: MessageCircle, label: "WhatsApp" },
-                { icon: Mail, label: "Email" },
-                { icon: Webhook, label: "Webhooks" },
-                { icon: Cloud, label: "Open API" },
-                { icon: Shield, label: "FBR / POS" },
-                { icon: BarChart3, label: "Exports" },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="p-4 rounded-2xl flex flex-col items-center text-center gap-2"
-                  style={{
-                    background: C.lightGray,
-                    border: `1px solid ${C.cardBorder}`,
-                  }}
-                >
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: "#EFF4FF" }}
-                  >
-                    <item.icon size={18} color={C.blue} />
-                  </div>
-                  <p
-                    style={{
-                      color: C.nearBlack,
-                      fontSize: 13,
-                      fontFamily: headingFont,
-                      fontWeight: 600,
-                    }}
-                  >
-                    {item.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Why SalesVince */}
       <section className="py-20 px-6" style={{ background: C.lightGray }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-start">
             <div>
               <Eyebrow>
                 <Award size={11} /> Why SalesVince
@@ -673,14 +635,14 @@ export default function ERPPage() {
 
       {/* Social proof */}
       <section className="py-20 px-6" style={{ background: "white" }}>
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
             <H2>Businesses already running on SalesVince.</H2>
             <p style={{ color: C.slate, fontFamily: bodyFont, fontSize: 14 }}>
               Across 9 industries in Pakistan&apos;s main commercial cities.
             </p>
           </div>
-          <div className="grid grid-cols-3 md:grid-cols-9 gap-3 mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-9 gap-3 mb-12">
             {[
               { icon: ShoppingBag, label: "FMCG" },
               { icon: Package, label: "Pharma" },
@@ -694,14 +656,14 @@ export default function ERPPage() {
             ].map((ind, i) => (
               <div
                 key={i}
-                className="flex flex-col items-center gap-2 p-3 rounded-2xl"
+                className="flex flex-col items-center gap-2 p-3 rounded-2xl min-w-0"
                 style={{ background: C.lightGray, border: `1px solid ${C.cardBorder}` }}
               >
                 <ind.icon size={18} color={C.blue} />
                 <span
+                  className="text-[10px] sm:text-[11px] leading-tight break-words"
                   style={{
                     color: C.nearBlack,
-                    fontSize: 9,
                     fontFamily: bodyFont,
                     fontWeight: 600,
                     textAlign: "center",
@@ -777,10 +739,10 @@ export default function ERPPage() {
       </section>
 
       {/* Final CTA + lead form */}
-      <section className="py-20 px-6 relative overflow-hidden" style={{ background: grad }}>
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            <div>
+      <section className="py-20 px-6 relative overflow-x-hidden" style={{ background: grad }}>
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-start">
+            <div className="min-w-0">
               <h2
                 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight"
                 style={{ fontFamily: headingFont, letterSpacing: "-0.5px" }}
@@ -795,7 +757,7 @@ export default function ERPPage() {
                 so you are looking at your business rather than a generic sample company.
                 Thirty minutes, no obligation, and you keep the report pack we produce from it.
               </p>
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 w-full sm:w-auto [&>*]:w-full sm:[&>*]:w-auto">
                 <PrimaryBtn
                   href="#erp-demo-form"
                   size="md"
@@ -810,7 +772,7 @@ export default function ERPPage() {
             </div>
             <div
               id="erp-demo-form"
-              className="rounded-2xl p-6 scroll-mt-24 shadow-xl"
+              className="rounded-2xl p-5 sm:p-6 scroll-mt-24 shadow-xl min-w-0"
               style={{
                 background: "#fff",
                 border: `1px solid ${C.cardBorder}`,

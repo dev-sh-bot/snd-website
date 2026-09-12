@@ -50,7 +50,7 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: SITE_NAME,
     url: SITE_URL,
-    logo: `${SITE_URL}/favicon.svg`,
+    logo: `${SITE_URL}/salesvince-mark-blue.png`,
     description: SITE_DESCRIPTION,
     address: {
       "@type": "PostalAddress",
@@ -121,7 +121,7 @@ export function articleJsonLd(post: {
       name: SITE_NAME,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/favicon.svg`,
+        url: `${SITE_URL}/salesvince-mark-blue.png`,
       },
     },
     mainEntityOfPage: `${SITE_URL}${post.path}`,

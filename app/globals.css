@@ -13,6 +13,9 @@ html,
 body {
   height: 100%;
   margin: 0;
+  /* clip avoids the overflow-x:hidden + overflow-y:visible quirk that
+     turns the element into a scroll container and breaks window.scrollY */
+  overflow-x: clip;
 }
 
 body {
@@ -74,7 +77,7 @@ textarea:focus-visible {
   }
 }
 
-/* ERP module rows: give screenshots more width than text */
+/* ERP module rows: equal text / screenshot columns at desktop */
 .erp-lightmod {
   display: grid;
   grid-template-columns: 1fr;
@@ -82,15 +85,13 @@ textarea:focus-visible {
   align-items: center;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .erp-lightmod {
     gap: 3rem;
   }
-  .erp-lightmod.erp-img-right {
-    grid-template-columns: 0.85fr 1.35fr;
-  }
+  .erp-lightmod.erp-img-right,
   .erp-lightmod.erp-img-left {
-    grid-template-columns: 1.35fr 0.85fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
