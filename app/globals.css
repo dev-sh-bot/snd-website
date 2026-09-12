@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy: #0A1A4F;
+  --color-brand: #1E3FAE;
+  --color-bright: #3B6CF6;
+  --color-near-black: #0B0F1A;
+  --color-slate: #5A6478;
+  --color-light-gray: #F4F6FB;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #fff;
+  color: #0B0F1A;
+}
+
+button {
+  font: inherit;
+}
+
+/* Visible keyboard focus (WCAG 2.4.7) */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid #3B6CF6;
+  outline-offset: 3px;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #3B6CF6;
+  outline-offset: 1px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  z-index: 100;
+  transform: translateY(-120%);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  background: #1E3FAE;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(10, 26, 79, 0.25);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0.75rem);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ERP module rows: give screenshots more width than text */
+.erp-lightmod {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .erp-lightmod {
+    gap: 3rem;
+  }
+  .erp-lightmod.erp-img-right {
+    grid-template-columns: 0.85fr 1.35fr;
+  }
+  .erp-lightmod.erp-img-left {
+    grid-template-columns: 1.35fr 0.85fr;
+  }
+}
+
+@media (min-width: 1280px) {
+  .erp-lightmod {
+    gap: 3.5rem;
+  }
+}
