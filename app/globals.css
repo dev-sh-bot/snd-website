@@ -13,9 +13,28 @@ html,
 body {
   height: 100%;
   margin: 0;
+  min-width: 320px;
+  scrollbar-gutter: stable;
   /* clip avoids the overflow-x:hidden + overflow-y:visible quirk that
      turns the element into a scroll container and breaks window.scrollY */
   overflow-x: clip;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+main {
+  min-width: 0;
 }
 
 body {
@@ -85,7 +104,7 @@ textarea:focus-visible {
   align-items: center;
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
   .erp-lightmod {
     gap: 3rem;
   }
@@ -95,7 +114,7 @@ textarea:focus-visible {
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
   .erp-lightmod {
     gap: 3.5rem;
   }

@@ -45,14 +45,14 @@ export default function SDPage() {
     <div>
       <section className="pt-32 pb-20 px-6" style={{ background: C.lightGray }}>
         <Container>
-          <div className="hidden xl:flex items-center justify-center xl:justify-start gap-2 mb-6 text-sm" style={{ color: C.slate, fontFamily: bodyFont }}>
+          <div className="hidden lg:flex items-center justify-center lg:justify-start gap-2 mb-6 text-sm" style={{ color: C.slate, fontFamily: bodyFont }}>
             <span>Products</span><ChevronRight size={14} /><span style={{ color: C.blue }}>Sales & Distribution Software</span>
           </div>
-          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-1">
               <RouteMapMockup />
             </div>
-            <div className="order-2 min-w-0 text-center xl:text-left">
+            <div className="order-2 min-w-0 text-center lg:text-left">
               <Eyebrow><Route size={11} /> Sales & Distribution Software</Eyebrow>
               <h1 className="text-4xl md:text-5xl font-bold mb-5 leading-tight" style={{ color: C.nearBlack, fontFamily: headingFont, letterSpacing: "-0.5px" }}>
                 Your Entire Distribution Network. Under Control.
@@ -60,7 +60,7 @@ export default function SDPage() {
               <p className="text-lg mb-8 leading-relaxed" style={{ color: C.slate, fontFamily: bodyFont }}>
                 From route planning to field order booking to recovery collection — SalesVince gives you complete visibility over your distribution operations, in real time.
               </p>
-          <div className="flex flex-row gap-2 sm:gap-3 justify-center xl:justify-start w-full max-w-md mx-auto">
+              <div className="flex flex-row gap-2 sm:gap-3 justify-center lg:justify-start w-full max-w-md mx-auto">
                 <PrimaryBtn href={PAGE_PATHS.demo} size="sm" className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !gap-1 !text-xs sm:!px-8 sm:!py-4 sm:!gap-2 sm:!text-base">Book Free Demo <ArrowRight size={16} className="shrink-0" aria-hidden /></PrimaryBtn>
                 <WABtn className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !py-2.5 !gap-1 !text-xs sm:!px-6 sm:!py-3 sm:!gap-2 sm:!text-sm">WhatsApp Us Now</WABtn>
               </div>
@@ -99,7 +99,7 @@ export default function SDPage() {
       {/* Solution */}
       <Section>
         <Container>
-          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Mobile app mockup — first on all breakpoints (left at lg+) */}
             <div className="order-1 flex justify-center">
               <div className="relative" style={{ width: 260 }}>

@@ -55,14 +55,14 @@ export function Logo({ variant = "color" }: { variant?: "white" | "color" }) {
   );
 }
 
-export function PrimaryBtn({ children, onClick, href, size = "md", full = false, className = "", type = "button" }: { children: ReactNode; onClick?: () => void; href?: string; size?: BtnSize; full?: boolean; className?: string; type?: "button" | "submit" }) {
-  const classes = `${btnPadding(size)} ${full ? "w-full justify-center" : ""} rounded-xl font-semibold text-white inline-flex items-center gap-2 transition-all duration-200 hover:opacity-90 hover:shadow-xl active:scale-[0.98] cursor-pointer ${className}`;
+export function PrimaryBtn({ children, onClick, href, size = "md", full = false, className = "", type = "button", disabled = false }: { children: ReactNode; onClick?: () => void; href?: string; size?: BtnSize; full?: boolean; className?: string; type?: "button" | "submit"; disabled?: boolean }) {
+  const classes = `${btnPadding(size)} ${full ? "w-full justify-center" : ""} rounded-xl font-semibold text-white inline-flex items-center gap-2 transition-all duration-200 hover:opacity-90 hover:shadow-xl active:scale-[0.98] cursor-pointer disabled:cursor-not-allowed disabled:opacity-60 ${className}`;
   const style = { background: gradBtn, boxShadow: "0 4px 20px rgba(59,108,246,0.3)", fontFamily: bodyFont };
   if (href) {
     return <Link href={href} className={classes} style={style}>{children}</Link>;
   }
   return (
-    <button type={type} onClick={onClick} className={classes} style={style}>
+    <button type={type} onClick={onClick} disabled={disabled} className={classes} style={style}>
       {children}
     </button>
   );
@@ -99,7 +99,7 @@ export function Eyebrow({ children }: { children: ReactNode }) {
 }
 
 export function H1({ children, light = false }: { children: ReactNode; light?: boolean }) {
-  return <h1 className="text-4xl md:text-5xl xl:text-[56px] font-bold leading-[1.1] mb-5 tracking-tight" style={{ color: light ? "#fff" : C.nearBlack, fontFamily: headingFont }}>{children}</h1>;
+  return <h1 className="text-4xl md:text-5xl lg:text-[56px] font-bold leading-[1.1] mb-5 tracking-tight" style={{ color: light ? "#fff" : C.nearBlack, fontFamily: headingFont }}>{children}</h1>;
 }
 
 export function H2({ children, light = false, center = true }: { children: ReactNode; light?: boolean; center?: boolean }) {
@@ -132,7 +132,7 @@ export function DashboardMockup() {
     { name: "Gulshan", val: 290 }, { name: "Clifton", val: 560 }, { name: "Korangi", val: 210 },
   ];
   return (
-    <div className="relative w-full max-w-[500px] mx-auto xl:mx-0">
+    <div className="relative w-full max-w-[500px] mx-auto lg:mx-0">
       {/* Browser frame */}
       <div className="rounded-2xl overflow-hidden" style={{ boxShadow: "0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.07)" }}>
         {/* Chrome bar */}
@@ -204,8 +204,8 @@ export function DashboardMockup() {
           </div>
         </div>
       </div>
-      {/* Floating cards: tucked inside on lg, float outside on xl+ */}
-      <div className="absolute left-2 xl:-left-14 top-[30%] rounded-2xl p-3.5 hidden xl:block z-10" style={{ background: "white", minWidth: 165, border: `1px solid ${C.cardBorder}`, boxShadow: "0 20px 50px rgba(0,0,0,0.15)" }}>
+      {/* Floating cards float outside the mockup at the desktop breakpoint. */}
+      <div className="absolute left-2 lg:-left-14 top-[30%] rounded-2xl p-3.5 hidden lg:block z-10" style={{ background: "white", minWidth: 165, border: `1px solid ${C.cardBorder}`, boxShadow: "0 20px 50px rgba(0,0,0,0.15)" }}>
         <div className="flex items-center gap-2 mb-2">
           <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#DCFCE7" }}>
             <DollarSign size={13} color={C.green} />
@@ -215,7 +215,7 @@ export function DashboardMockup() {
         <p className="font-bold" style={{ color: C.nearBlack, fontSize: 16, fontFamily: headingFont }}>Rs. 320,500</p>
         <p style={{ color: C.green, fontSize: 9, fontFamily: bodyFont }}>✓ 28 parties settled</p>
       </div>
-      <div className="absolute right-2 xl:-right-12 bottom-[28%] rounded-2xl p-3.5 hidden xl:block z-10" style={{ background: "white", minWidth: 158, border: `1px solid ${C.cardBorder}`, boxShadow: "0 20px 50px rgba(0,0,0,0.15)" }}>
+      <div className="absolute right-2 lg:-right-12 bottom-[28%] rounded-2xl p-3.5 hidden lg:block z-10" style={{ background: "white", minWidth: 158, border: `1px solid ${C.cardBorder}`, boxShadow: "0 20px 50px rgba(0,0,0,0.15)" }}>
         <div className="flex items-center gap-2 mb-2">
           <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#EFF4FF" }}>
             <MapPin size={13} color={C.blue} />
@@ -286,7 +286,7 @@ export function RouteMapMockup() {
 
 export function PhoneMockup() {
   return (
-    <div className="relative mx-auto w-[260px] sm:w-[280px] xl:w-[320px]">
+    <div className="relative mx-auto w-[260px] sm:w-[280px] lg:w-[320px]">
       <div className="rounded-[40px] overflow-hidden" style={{ border: "8px solid #0A1A4F", boxShadow: "0 40px 80px rgba(10,26,79,0.35)" }}>
         {/* Status bar */}
         <div className="px-4 pt-3 pb-1 flex items-center justify-between" style={{ background: "#050D20" }}>
@@ -484,8 +484,8 @@ export function LightMod({ n, eyebrow, headline, subhead, body, bullets, imageRi
     <section className="py-20 px-6" style={{ background: bg }}>
       <div className="max-w-7xl mx-auto">
         <div className={`erp-lightmod ${imageRight ? "erp-img-right" : "erp-img-left"}`}>
-          <div className={`order-1 min-w-0 ${imageRight ? "xl:order-2" : "xl:order-1"}`}>{screenshot}</div>
-          <div className={`order-2 min-w-0 ${imageRight ? "xl:order-1" : "xl:order-2"}`}>
+          <div className={`order-1 min-w-0 ${imageRight ? "lg:order-2" : "lg:order-1"}`}>{screenshot}</div>
+          <div className={`order-2 min-w-0 ${imageRight ? "lg:order-1" : "lg:order-2"}`}>
             {label && (
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold mb-4" style={{ background: "#EFF4FF", color: C.blue, fontFamily: bodyFont }}>
                 {label}
@@ -512,12 +512,12 @@ export function LightMod({ n, eyebrow, headline, subhead, body, bullets, imageRi
 /** Product screenshot from /public/images/erp */
 export function ErpShot({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="relative w-full max-w-md xl:max-w-none mx-auto flex items-center justify-center">
+    <div className="relative w-full max-w-md lg:max-w-none mx-auto flex items-center justify-center">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={`/images/erp/${src}`}
         alt={alt}
-        className="w-full h-auto object-contain max-h-[420px] xl:max-h-none"
+        className="w-full h-auto object-contain max-h-[420px] lg:max-h-none"
         style={{ filter: "drop-shadow(0 28px 50px rgba(10,26,79,0.18))" }}
         loading="lazy"
       />
@@ -533,9 +533,9 @@ export function DarkMod({ n, headline, subhead, body, bullets, smart, btnLabel =
   return (
     <section className="py-20 px-6" style={{ background: grad }}>
       <div className="max-w-7xl mx-auto">
-        <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-center">
-          <div className="order-1 xl:order-2">{screenshot}</div>
-          <div className="order-2 xl:order-1">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="order-1 lg:order-2">{screenshot}</div>
+          <div className="order-2 lg:order-1">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold mb-4" style={{ background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.85)", fontFamily: bodyFont }}>
               Module {String(n).padStart(2, "0")}
             </div>

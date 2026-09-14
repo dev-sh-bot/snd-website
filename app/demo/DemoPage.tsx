@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import {
   ArrowRight,
   Check,
@@ -20,12 +20,29 @@ import {
   bodyFont
 } from "@/lib/brand";
 import { CONTACT, WHATSAPP_URL } from "@/lib/site";
+import { submitLead } from "@/lib/lead";
 
 export default function DemoPage() {
   const [form, setForm] = useState({ name: "", business: "", city: "", phone: "", type: "", product: "", employees: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const upd = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }));
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitting(true);
+    setError("");
+
+    try {
+      await submitLead("demo", form);
+      setSubmitted(true);
+    } catch (submissionError) {
+      setError(submissionError instanceof Error ? submissionError.message : "We could not send your request. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
   const cityOpts = ["Karachi", "Lahore", "Faisalabad", "Rawalpindi", "Multan", "Peshawar", "Quetta", "Sialkot", "Gujranwala", "Other"];
   const typeOpts = ["Distributor", "Wholesaler", "Manufacturer", "Retailer", "Trading Company", "Services", "Other"];
   const productOpts = ["Business ERP Software", "Sales & Distribution Software", "Both"];
@@ -35,7 +52,7 @@ export default function DemoPage() {
     <div>
       <div className="pt-24" style={{ background: C.lightGray }}>
         <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="grid xl:grid-cols-2 gap-10 xl:gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-stretch">
             <div className="min-w-0">
               <Eyebrow><Calendar size={11} aria-hidden /> Free Demo</Eyebrow>
               <h1 className="text-4xl md:text-5xl font-bold mb-5 leading-tight" style={{ color: C.nearBlack, fontFamily: headingFont, letterSpacing: "-0.5px" }}>
@@ -84,9 +101,9 @@ export default function DemoPage() {
               </div>
             </div>
 
-            <div className="w-full min-w-0 rounded-3xl p-5 sm:p-8" style={{ background: "white", border: `1px solid ${C.cardBorder}`, boxShadow: "0 20px 60px rgba(0,0,0,0.07)" }}>
+            <div className="w-full min-w-0 h-full rounded-3xl p-5 sm:p-8 flex flex-col" style={{ background: "white", border: `1px solid ${C.cardBorder}`, boxShadow: "0 20px 60px rgba(0,0,0,0.07)" }}>
               {submitted ? (
-                <div className="text-center py-12" role="status" aria-live="polite">
+                <div className="flex flex-1 flex-col items-center justify-center text-center py-12" role="status" aria-live="polite">
                   <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ background: "#DCFCE7" }} aria-hidden>
                     <Check size={28} color={C.green} />
                   </div>
@@ -98,10 +115,8 @@ export default function DemoPage() {
                   <h2 className="text-xl font-bold mb-6" style={{ color: C.nearBlack, fontFamily: headingFont }}>Tell us about your business</h2>
                   <form
                     className="space-y-4"
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      setSubmitted(true);
-                    }}
+                    onSubmit={handleSubmit}
+                    aria-busy={submitting}
                   >
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
@@ -125,7 +140,7 @@ export default function DemoPage() {
                         <label htmlFor="demo-phone" className="block text-sm font-semibold mb-1.5" style={{ color: C.nearBlack, fontFamily: bodyFont }}>WhatsApp / Phone *</label>
                         <div className="flex">
                           <span className="px-3 flex items-center rounded-l-xl text-sm" style={{ background: "#DDE5F0", color: C.slate, fontFamily: bodyFont, border: `1px solid ${C.cardBorder}`, borderRight: "none" }} aria-hidden>+92</span>
-                          <input id="demo-phone" name="tel" type="tel" autoComplete="tel-national" required aria-required="true" inputMode="tel" value={form.phone} onChange={e => upd("phone", e.target.value)} placeholder="3001234567" className="flex-1 px-3 py-3 rounded-r-xl text-sm min-w-0" style={{ border: `1px solid ${C.cardBorder}`, borderLeft: "none", background: C.lightGray, color: C.nearBlack, fontFamily: bodyFont }} />
+                          <input id="demo-phone" name="tel" type="tel" autoComplete="tel-national" required aria-required="true" inputMode="tel" value={form.phone} onChange={e => upd("phone", e.target.value)} placeholder="3202665270" className="flex-1 px-3 py-3 rounded-r-xl text-sm min-w-0" style={{ border: `1px solid ${C.cardBorder}`, borderLeft: "none", background: C.lightGray, color: C.nearBlack, fontFamily: bodyFont }} />
                         </div>
                       </div>
                     </div>
@@ -156,9 +171,10 @@ export default function DemoPage() {
                       <label htmlFor="demo-message" className="block text-sm font-semibold mb-1.5" style={{ color: C.nearBlack, fontFamily: bodyFont }}>Message (optional)</label>
                       <textarea id="demo-message" name="message" value={form.message} onChange={e => upd("message", e.target.value)} placeholder="Tell us anything specific about your business or what you want to see in the demo..." rows={3} className="w-full px-4 py-3 rounded-xl text-sm resize-none" style={{ border: `1px solid ${C.cardBorder}`, background: C.lightGray, color: C.nearBlack, fontFamily: bodyFont }} />
                     </div>
-                    <PrimaryBtn type="submit" full size="lg" className="whitespace-nowrap !px-3 !py-3 !text-sm sm:!px-8 sm:!py-4 sm:!text-base">
-                      Book My Free Demo <ArrowRight size={16} className="shrink-0" aria-hidden />
+                    <PrimaryBtn type="submit" full size="lg" disabled={submitting} className="whitespace-nowrap !px-3 !py-3 !text-sm sm:!px-8 sm:!py-4 sm:!text-base">
+                      {submitting ? "Sending request…" : "Book My Free Demo"} {!submitting && <ArrowRight size={16} className="shrink-0" aria-hidden />}
                     </PrimaryBtn>
+                    {error && <p className="text-sm text-center" style={{ color: "#B42318", fontFamily: bodyFont }} role="alert">{error}</p>}
                     <p className="text-center text-xs" style={{ color: C.slate, fontFamily: bodyFont }}>
                       Your information is private. No spam, only a demo call.
                     </p>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import {
   ChevronRight,
   ArrowRight,
@@ -40,6 +40,7 @@ import {
   bodyFont,
   PAGE_PATHS,
 } from "@/lib/brand";
+import { submitLead } from "@/lib/lead";
 
 type Mod = {
   title: string;
@@ -308,6 +309,23 @@ export default function ERPPage() {
     currentSystem: "",
   });
   const [demoSent, setDemoSent] = useState(false);
+  const [demoSubmitting, setDemoSubmitting] = useState(false);
+  const [demoError, setDemoError] = useState("");
+
+  const handleDemoSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setDemoSubmitting(true);
+    setDemoError("");
+
+    try {
+      await submitLead("erp-demo", demoForm);
+      setDemoSent(true);
+    } catch (submissionError) {
+      setDemoError(submissionError instanceof Error ? submissionError.message : "We could not send your request. Please try again.");
+    } finally {
+      setDemoSubmitting(false);
+    }
+  };
 
   return (
     <div>
@@ -321,18 +339,9 @@ export default function ERPPage() {
           style={{ background: "linear-gradient(180deg, #EFF4FF 0%, #F4F6FB 100%)" }}
         />
         <div className="relative z-10 flex flex-col max-w-5xl mx-auto">
-          <div className="order-1 w-full mb-12">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/erp/hero-banner.png"
-              alt="SalesVince ERP on desktop and mobile"
-              className="w-full h-auto object-contain"
-              style={{ filter: "drop-shadow(0 32px 60px rgba(10,26,79,0.22))" }}
-            />
-          </div>
-          <div className="order-2 max-w-3xl mx-auto w-full">
+          <div className="max-w-3xl mx-auto w-full">
             <div
-              className="hidden xl:flex items-center justify-center gap-2 mb-5 text-sm"
+              className="hidden lg:flex items-center justify-center gap-2 mb-5 text-sm"
               style={{ color: C.slate, fontFamily: bodyFont }}
             >
               <span>Products</span>
@@ -343,7 +352,7 @@ export default function ERPPage() {
               <Zap size={11} /> Business ERP Software
             </Eyebrow>
             <h1
-              className="text-4xl md:text-5xl xl:text-[54px] font-bold leading-[1.1] mb-5 tracking-tight"
+              className="text-4xl md:text-5xl lg:text-[54px] font-bold leading-[1.1] mb-5 tracking-tight"
               style={{ color: C.nearBlack, fontFamily: headingFont }}
             >
               The ERP that helps you manage{" "}
@@ -382,13 +391,22 @@ export default function ERPPage() {
               ))}
             </div>
           </div>
+          <div className="w-full mt-12">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/erp/hero-banner.png"
+              alt="SalesVince ERP on desktop and mobile"
+              className="w-full h-auto object-contain"
+              style={{ filter: "drop-shadow(0 32px 60px rgba(10,26,79,0.22))" }}
+            />
+          </div>
         </div>
       </section>
 
       {/* Smart in every module */}
       <section className="py-20 px-6" style={{ background: "white" }}>
         <div className="max-w-7xl mx-auto">
-          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
               <H2 center={false}>Smart in every module</H2>
               <p
@@ -518,7 +536,7 @@ export default function ERPPage() {
       {/* Why SalesVince */}
       <section className="py-20 px-6" style={{ background: C.lightGray }}>
         <div className="max-w-7xl mx-auto">
-          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div>
               <Eyebrow>
                 <Award size={11} /> Why SalesVince
@@ -642,7 +660,7 @@ export default function ERPPage() {
               Across 9 industries in Pakistan&apos;s main commercial cities.
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-9 gap-3 mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-3 mb-12">
             {[
               { icon: ShoppingBag, label: "FMCG" },
               { icon: Package, label: "Pharma" },
@@ -741,7 +759,7 @@ export default function ERPPage() {
       {/* Final CTA + lead form */}
       <section className="py-20 px-6 relative overflow-x-hidden" style={{ background: grad }}>
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div className="min-w-0">
               <h2
                 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight"
@@ -807,10 +825,8 @@ export default function ERPPage() {
                   </h3>
                   <form
                     className="space-y-3"
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      setDemoSent(true);
-                    }}
+                    onSubmit={handleDemoSubmit}
+                    aria-busy={demoSubmitting}
                   >
                     {[
                       { key: "name", id: "erp-demo-name", label: "Your name", placeholder: "Muhammad Ali", autoComplete: "name", type: "text" },
@@ -826,7 +842,7 @@ export default function ERPPage() {
                         key: "phone",
                         id: "erp-demo-phone",
                         label: "WhatsApp / Phone",
-                        placeholder: "+92 300 1234567",
+                        placeholder: "+92 320 2665270",
                         autoComplete: "tel",
                         type: "tel",
                       },
@@ -926,9 +942,10 @@ export default function ERPPage() {
                         }}
                       />
                     </div>
-                    <PrimaryBtn type="submit" full size="lg" className="mt-1">
-                      Book a live demo <ArrowRight size={16} aria-hidden />
+                    <PrimaryBtn type="submit" full size="lg" disabled={demoSubmitting} className="mt-1">
+                      {demoSubmitting ? "Sending request…" : "Book a live demo"} {!demoSubmitting && <ArrowRight size={16} aria-hidden />}
                     </PrimaryBtn>
+                    {demoError && <p className="text-sm text-center" style={{ color: "#B42318", fontFamily: bodyFont }} role="alert">{demoError}</p>}
                   </form>
                 </>
               )}

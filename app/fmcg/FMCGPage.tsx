@@ -33,16 +33,16 @@ export default function FMCGPage() {
     <div>
       <section className="pt-32 pb-20 px-6" style={{ background: grad }}>
         <Container>
-          <div className="hidden xl:flex items-center justify-center xl:justify-start gap-2 mb-6 text-sm" style={{ color: "rgba(255,255,255,0.6)", fontFamily: bodyFont }}>
+          <div className="hidden lg:flex items-center justify-center lg:justify-start gap-2 mb-6 text-sm" style={{ color: "rgba(255,255,255,0.6)", fontFamily: bodyFont }}>
             <span>Industries</span><ChevronRight size={14} /><span style={{ color: "rgba(255,255,255,0.85)" }}>FMCG</span>
           </div>
-          <div className="max-w-2xl min-w-0 text-center xl:text-left">
+          <div className="max-w-2xl min-w-0 text-center lg:text-left">
             <Eyebrow><ShoppingBag size={11} /> FMCG</Eyebrow>
             <H1 light>ERP & Distribution Software for FMCG Businesses</H1>
             <p className="text-lg mb-8 leading-relaxed" style={{ color: "rgba(255,255,255,0.72)", fontFamily: bodyFont }}>
               From primary distribution to retail beat routes — SalesVince gives FMCG distributors and manufacturers complete control over their supply chain in Pakistan.
             </p>
-          <div className="flex flex-row gap-2 sm:gap-3 justify-center xl:justify-start w-full max-w-md mx-auto">
+          <div className="flex flex-row gap-2 sm:gap-3 justify-center lg:justify-start w-full max-w-md mx-auto">
               <PrimaryBtn href={PAGE_PATHS.demo} size="sm" className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !gap-1 !text-xs sm:!px-8 sm:!py-4 sm:!gap-2 sm:!text-base">Book Free Demo <ArrowRight size={16} className="shrink-0" aria-hidden /></PrimaryBtn>
               <WABtn className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !py-2.5 !gap-1 !text-xs sm:!px-6 sm:!py-3 sm:!gap-2 sm:!text-sm">WhatsApp Us Now</WABtn>
             </div>

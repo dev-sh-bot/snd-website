@@ -17,30 +17,34 @@ const cols: {
 
 export function Footer() {
   return (
-    <footer className="pt-16 pb-20 px-6 sm:pb-16" style={{ background: C.navy }}>
+    <footer className="px-6 py-16" style={{ background: C.navy }}>
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 xl:grid-cols-5 gap-y-10 gap-x-6 md:gap-6 mb-12">
-          <div className="col-span-1 md:col-span-4 xl:col-span-1 flex flex-col items-center text-center xl:items-start xl:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-y-10 gap-x-6 md:gap-6 mb-12">
+          <div className="col-span-1 md:col-span-4 lg:col-span-1 flex flex-col items-center text-center lg:items-start lg:text-left">
             <Logo variant="white" />
-            <p className="mt-3 text-sm leading-relaxed max-w-xs mx-auto xl:mx-0" style={{ color: "rgba(255,255,255,0.7)", fontFamily: bodyFont }}>Business software built for Pakistan</p>
+            <p className="mt-3 text-sm leading-relaxed max-w-xs mx-auto lg:mx-0" style={{ color: "rgba(255,255,255,0.7)", fontFamily: bodyFont }}>Business software built for Pakistan</p>
           </div>
           {cols.map((col) => (
-            <div key={col.title} className="text-center xl:text-left">
+            <div key={col.title} className="text-center lg:text-left">
               <h2 className="font-semibold mb-4 text-sm" style={{ color: "rgba(255,255,255,0.85)", fontFamily: headingFont }}>{col.title}</h2>
               {col.custom ? (
-                <div className="space-y-3 max-w-xs mx-auto xl:mx-0">
+                <div className="space-y-3 max-w-xs mx-auto lg:mx-0">
                   <PrimaryBtn href={PAGE_PATHS.demo} size="sm" full className="whitespace-nowrap !px-2 !text-xs sm:!px-4 sm:!text-sm">Book Free Demo</PrimaryBtn>
-                  <a href={`tel:${CONTACT.phoneTel}`} className="flex items-center justify-center xl:justify-start gap-2 text-sm break-all" style={{ color: "rgba(255,255,255,0.75)", fontFamily: bodyFont }}>
+                  <a href={`tel:${CONTACT.phoneTel}`} className="flex items-center justify-center lg:justify-start gap-2 text-sm break-all" style={{ color: "rgba(255,255,255,0.75)", fontFamily: bodyFont }}>
                     <Phone size={13} aria-hidden className="flex-shrink-0" />
                     <span>{CONTACT.phoneDisplay}</span>
                   </a>
-                  <a href={`mailto:${CONTACT.email}`} className="flex items-center justify-center xl:justify-start gap-2 text-sm break-all" style={{ color: "rgba(255,255,255,0.75)", fontFamily: bodyFont }}>
+                  <a href={`mailto:${CONTACT.email}`} className="flex items-center justify-center lg:justify-start gap-2 text-sm break-all" style={{ color: "rgba(255,255,255,0.75)", fontFamily: bodyFont }}>
                     <Mail size={13} aria-hidden className="flex-shrink-0" />
                     <span>{CONTACT.email}</span>
                   </a>
+                  <a href={`mailto:${CONTACT.secondaryEmail}`} className="flex items-center justify-center lg:justify-start gap-2 text-sm break-all" style={{ color: "rgba(255,255,255,0.75)", fontFamily: bodyFont }}>
+                    <Mail size={13} aria-hidden className="flex-shrink-0" />
+                    <span>{CONTACT.secondaryEmail}</span>
+                  </a>
                 </div>
               ) : (
-                <ul className="space-y-2 text-center xl:text-left">
+                <ul className="space-y-2 text-center lg:text-left">
                   {col.links?.map((link) => (
                     <li key={link.l}>
                       <Link href={PAGE_PATHS[link.p]} className="text-sm transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.72)", fontFamily: bodyFont }}>
@@ -55,7 +59,7 @@ export function Footer() {
         </div>
         <div className="border-t pt-6 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left sm:pb-0" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
           <p className="text-sm" style={{ color: "rgba(255,255,255,0.7)", fontFamily: bodyFont }}>© 2026 SalesVince. All rights reserved.</p>
-          <div className="flex flex-wrap items-center justify-center gap-4 pr-0 sm:gap-6 sm:justify-end xl:pr-24">
+          <div className="flex flex-wrap items-center justify-center gap-4 pr-0 sm:gap-6 sm:justify-end lg:pr-24">
             <Link href="/privacy" className="text-sm transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.7)", fontFamily: bodyFont }}>
               Privacy Policy
             </Link>

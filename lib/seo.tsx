@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+import { CONTACT, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 
 type BuildMetadataInput = {
   title: string;
@@ -60,8 +60,8 @@ export function organizationJsonLd() {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer support",
-      email: "hello@salesvince.com",
-      telephone: "+92-300-1234567",
+      email: CONTACT.email,
+      telephone: CONTACT.phoneTel,
       areaServed: "PK",
       availableLanguage: ["English", "Urdu"],
     },

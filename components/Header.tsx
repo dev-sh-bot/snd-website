@@ -143,7 +143,7 @@ export function Header() {
       >
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Logo variant={logoVariant} />
-          <nav className="hidden xl:flex items-center gap-1" aria-label="Primary">
+          <nav className="hidden lg:flex items-center gap-1" aria-label="Primary">
             {navLinks.map((link, i) => (
               <div
                 key={i}
@@ -204,13 +204,13 @@ export function Header() {
             ))}
           </nav>
           <div className="flex items-center gap-3">
-            <div className="hidden xl:block">
+            <div className="hidden lg:block">
               <PrimaryBtn href={PAGE_PATHS.demo} size="sm">Book Free Demo</PrimaryBtn>
             </div>
             <button
               ref={menuBtnRef}
               type="button"
-              className="xl:hidden p-2"
+              className="lg:hidden p-2"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav"

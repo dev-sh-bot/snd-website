@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import {
   ArrowRight,
   Check,
@@ -24,13 +24,30 @@ import {
   bodyFont
 } from "@/lib/brand";
 import { CONTACT, WHATSAPP_URL } from "@/lib/site";
+import { submitLead } from "@/lib/lead";
 
 const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONTACT.office)}`;
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const upd = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }));
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitting(true);
+    setError("");
+
+    try {
+      await submitLead("contact", form);
+      setSent(true);
+    } catch (submissionError) {
+      setError(submissionError instanceof Error ? submissionError.message : "We could not send your message. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div>
@@ -50,7 +67,7 @@ export default function ContactPage() {
             {[
               { icon: MessageCircle, title: "WhatsApp", info: CONTACT.phoneDisplay, sub: "Chat with us directly", color: C.wa, href: WHATSAPP_URL, external: true },
               { icon: Phone, title: "Call Us", info: CONTACT.phoneDisplay, sub: "Mon–Sat, 9am–6pm", color: C.blue, href: `tel:${CONTACT.phoneTel}`, external: false },
-              { icon: Mail, title: "Email", info: CONTACT.email, sub: "We reply within 4 hours", color: C.bright, href: `mailto:${CONTACT.email}`, external: false },
+                { icon: Mail, title: "Email", info: CONTACT.email, sub: CONTACT.secondaryEmail, color: C.bright, href: `mailto:${CONTACT.email}`, external: false },
             ].map((c, i) => (
               <a
                 key={i}
@@ -70,7 +87,7 @@ export default function ContactPage() {
             ))}
           </div>
 
-          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
             <div className="rounded-2xl overflow-hidden" style={{ background: C.lightGray, border: `1px solid ${C.cardBorder}`, minHeight: 300 }}>
               <div className="h-full flex flex-col items-center justify-center p-10 text-center" style={{ minHeight: 300 }}>
                 <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style={{ background: "#EFF4FF" }} aria-hidden>
@@ -98,10 +115,8 @@ export default function ContactPage() {
                   <h2 className="text-xl font-bold mb-6" style={{ color: C.nearBlack, fontFamily: headingFont }}>Send Us a Message</h2>
                   <form
                     className="space-y-4"
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      setSent(true);
-                    }}
+                    onSubmit={handleSubmit}
+                    aria-busy={submitting}
                   >
                     <div>
                       <label htmlFor="contact-name" className="block text-sm font-semibold mb-1.5" style={{ color: C.nearBlack, fontFamily: bodyFont }}>Your Name</label>
@@ -114,14 +129,15 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <label htmlFor="contact-phone" className="block text-sm font-semibold mb-1.5" style={{ color: C.nearBlack, fontFamily: bodyFont }}>Phone</label>
-                        <input id="contact-phone" name="tel" type="tel" autoComplete="tel" value={form.phone} onChange={e => upd("phone", e.target.value)} placeholder="+92 300..." className="w-full px-4 py-3 rounded-xl text-sm" style={{ border: `1px solid ${C.cardBorder}`, background: C.lightGray, fontFamily: bodyFont }} />
+                        <input id="contact-phone" name="tel" type="tel" autoComplete="tel" value={form.phone} onChange={e => upd("phone", e.target.value)} placeholder="+92 320..." className="w-full px-4 py-3 rounded-xl text-sm" style={{ border: `1px solid ${C.cardBorder}`, background: C.lightGray, fontFamily: bodyFont }} />
                       </div>
                     </div>
                     <div>
                       <label htmlFor="contact-message" className="block text-sm font-semibold mb-1.5" style={{ color: C.nearBlack, fontFamily: bodyFont }}>Message</label>
                       <textarea id="contact-message" name="message" required aria-required="true" value={form.message} onChange={e => upd("message", e.target.value)} placeholder="Tell us about your business and what you need..." rows={4} className="w-full px-4 py-3 rounded-xl text-sm resize-none" style={{ border: `1px solid ${C.cardBorder}`, background: C.lightGray, fontFamily: bodyFont }} />
                     </div>
-                    <PrimaryBtn type="submit" full size="lg">Send Message <ArrowRight size={16} aria-hidden /></PrimaryBtn>
+                    <PrimaryBtn type="submit" full size="lg" disabled={submitting}>{submitting ? "Sending message…" : "Send Message"} {!submitting && <ArrowRight size={16} aria-hidden />}</PrimaryBtn>
+                    {error && <p className="text-sm text-center" style={{ color: "#B42318", fontFamily: bodyFont }} role="alert">{error}</p>}
                   </form>
                 </>
               )}
