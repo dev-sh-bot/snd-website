@@ -23,11 +23,11 @@ jobs:
 
       - name: Deploy to DigitalOcean VPS
         env:
-          SSHPASS: ${{ secrets.VPS_PASSWORD }}
+          SSHPASS: ${{ secrets.FTP_PASSWORD }}
         run: |
           sshpass -e ssh \
             -o StrictHostKeyChecking=accept-new \
-            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+            ${{ secrets.FTP_USER }}@${{ secrets.FTP_HOST }} << 'EOF'
 
             set -e
 
