@@ -32,10 +32,10 @@ jobs:
             set -e
 
             echo "=============================="
-            echo "SalesVince API Deployment"
+            echo "SalesVince WEBSITE Deployment"
             echo "=============================="
 
-            cd "/salesvince.com"
+            cd "/var/www/salesvince.com"
 
             echo "Current directory:"
             pwd
