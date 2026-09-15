@@ -1,4 +1,4 @@
-name: Deploy ERP Frontend
+name: Deploy SalesVince
 
 on:
   push:
@@ -7,36 +7,53 @@ on:
 
   workflow_dispatch:
 
+concurrency:
+  group: salesvince-production
+  cancel-in-progress: false
+
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Build React Project
-        run: npm run build
-
-      - name: Check Build
+      - name: Install SSH Password Tool
         run: |
-          echo "Build files:"
-          ls -la dist
+          sudo apt-get update
+          sudo apt-get install -y sshpass
 
-      - name: Deploy Dist via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          local-dir: ./dist/
-          server-dir: /salesvince.com/
+      - name: Deploy to DigitalOcean VPS
+        env:
+          SSHPASS: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          sshpass -e ssh \
+            -o StrictHostKeyChecking=accept-new \
+            ${{ secrets.FTP_USER }}@${{ secrets.FTP_HOST }} << 'EOF'
+
+            set -e
+
+            echo "=============================="
+            echo "SalesVince WEBSITE Deployment"
+            echo "=============================="
+
+            cd "/var/www/salesvince.com"
+
+            echo "Current directory:"
+            pwd
+
+            echo "Pulling latest code..."
+            git pull origin main
+
+            # echo "Installing dependencies..."
+            # npm ci
+
+            echo "Building NestJS..."
+            NODE_OPTIONS="--max-old-space-size=2048" npm run build
+
+            echo "Restarting PM2..."
+            pm2 restart salesvince --update-env
+
+            echo "=============================="
+            echo "Deployment Successful ✅"
+            echo "=============================="
+
+          EOF
