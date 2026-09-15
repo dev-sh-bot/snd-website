@@ -1,6 +1,5 @@
 
 import {
-  ChevronRight,
   ArrowRight,
   Check,
   DollarSign,
@@ -45,9 +44,6 @@ export default function SDPage() {
     <div>
       <section className="pt-32 pb-20 px-6" style={{ background: C.lightGray }}>
         <Container>
-          <div className="hidden lg:flex items-center justify-center lg:justify-start gap-2 mb-6 text-sm" style={{ color: C.slate, fontFamily: bodyFont }}>
-            <span>Products</span><ChevronRight size={14} /><span style={{ color: C.blue }}>Sales & Distribution Software</span>
-          </div>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-1">
               <RouteMapMockup />

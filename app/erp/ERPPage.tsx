@@ -2,7 +2,6 @@
 
 import { useState, type FormEvent, type ReactNode } from "react";
 import {
-  ChevronRight,
   ArrowRight,
   Check,
   Package,
@@ -331,41 +330,36 @@ export default function ERPPage() {
     <div>
       {/* Hero */}
       <section
-        className="pt-32 pb-16 px-6 text-center relative overflow-x-hidden"
+        className="pt-28 pb-16 px-6 relative overflow-x-hidden"
         style={{ background: C.lightGray }}
       >
         <div
           className="absolute inset-0"
           style={{ background: "linear-gradient(180deg, #EFF4FF 0%, #F4F6FB 100%)" }}
         />
-        <div className="relative z-10 flex flex-col max-w-5xl mx-auto">
-          <div className="max-w-3xl mx-auto w-full">
-            <div
-              className="hidden lg:flex items-center justify-center gap-2 mb-5 text-sm"
-              style={{ color: C.slate, fontFamily: bodyFont }}
-            >
-              <span>Products</span>
-              <ChevronRight size={14} />
-              <span style={{ color: C.blue }}>Business ERP Software</span>
-            </div>
-            <Eyebrow>
+        <div className="relative z-10 max-w-7xl mx-auto w-full">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="min-w-0 text-center lg:text-left">
+            <div className="flex justify-center lg:justify-start">
+              <Eyebrow>
               <Zap size={11} /> Business ERP Software
-            </Eyebrow>
+              </Eyebrow>
+            </div>
             <h1
-              className="text-4xl md:text-5xl lg:text-[54px] font-bold leading-[1.1] mb-5 tracking-tight"
+              className="text-4xl md:text-5xl lg:text-[52px] font-bold leading-[1.1] mb-5 tracking-tight"
               style={{ color: C.nearBlack, fontFamily: headingFont }}
             >
               The ERP that helps you manage{" "}
               <span style={{ color: C.blue }}>YOUR BUSINESS.</span>
             </h1>
             <p
-              className="text-lg md:text-xl mb-8 leading-relaxed max-w-2xl mx-auto"
+              className="text-lg md:text-xl mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0"
               style={{ color: C.slate, fontFamily: bodyFont }}
             >
               Sales, purchase, inventory, production, finance, payroll and POS in one
               system — with AI forecasting and smart alerts built into every module.
             </p>
-            <div className="flex flex-row gap-2 sm:gap-3 justify-center mb-6 w-full max-w-md sm:max-w-none mx-auto">
+            <div className="flex flex-row gap-2 sm:gap-3 justify-center lg:justify-start mb-6 w-full max-w-md sm:max-w-none mx-auto lg:mx-0">
               <PrimaryBtn href={PAGE_PATHS.demo} size="sm" className="flex-1 sm:flex-none min-w-0 justify-center whitespace-nowrap !px-2 !gap-1 !text-xs sm:!px-8 sm:!py-4 sm:!gap-2 sm:!text-base">
                 Start for Free <ArrowRight size={16} className="shrink-0" />
               </PrimaryBtn>
@@ -374,7 +368,7 @@ export default function ERPPage() {
               </SecBtn>
             </div>
             <div
-              className="grid grid-cols-1 sm:flex sm:flex-wrap sm:justify-center gap-x-5 gap-y-2 text-xs max-w-sm sm:max-w-none mx-auto text-left sm:text-center"
+              className="grid grid-cols-1 sm:flex sm:flex-wrap sm:justify-center lg:justify-start gap-x-5 gap-y-2 text-xs max-w-sm sm:max-w-none mx-auto lg:mx-0 text-left sm:text-center lg:text-left"
               style={{ color: C.slate, fontFamily: bodyFont }}
             >
               {[
@@ -390,8 +384,8 @@ export default function ERPPage() {
                 </span>
               ))}
             </div>
-          </div>
-          <div className="w-full mt-12">
+            </div>
+            <div className="w-full order-first lg:order-last">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/erp/hero-banner.png"
@@ -399,6 +393,7 @@ export default function ERPPage() {
               className="w-full h-auto object-contain"
               style={{ filter: "drop-shadow(0 32px 60px rgba(10,26,79,0.22))" }}
             />
+            </div>
           </div>
         </div>
       </section>
